@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,6 +18,7 @@ import com.aventstack.extentreports.ExtentTest;
 
 import PageObjects.LandingPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.opentelemetry.exporter.logging.SystemOutLogRecordExporter;
 
 public class BaseTest {
 
@@ -37,6 +39,10 @@ public class BaseTest {
 			driver = new FirefoxDriver();
 		} else if (browser.equalsIgnoreCase("edge")) {
 			WebDriverManager.edgedriver().setup();
+			driver= new EdgeDriver();
+		}
+		else {
+			System.out.println("browser not initiated");
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
